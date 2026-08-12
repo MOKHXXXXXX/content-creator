@@ -14,7 +14,7 @@ test.describe("Home page", () => {
       page.getByRole("link", { name: /start a project/i })
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /browse work/i })
+      page.getByRole("link", { name: /view work/i })
     ).toBeVisible();
   });
 

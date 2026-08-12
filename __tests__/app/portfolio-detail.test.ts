@@ -22,7 +22,7 @@ describe("portfolio detail page", () => {
         params: Promise.resolve({ slug: "activation-reduction-blog" }),
       });
       expect(metadata.title).toContain("How We Cut Activation Time");
-      expect(metadata.description).toContain("activation patterns");
+      expect(metadata.description).toContain("deep dive");
       expect(metadata.openGraph?.images?.[0]).toBeDefined();
     });
 

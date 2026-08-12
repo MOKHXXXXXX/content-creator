@@ -25,9 +25,7 @@ export async function generateMetadata({
   const item = getPortfolioItem(slug);
 
   if (!item) {
-    return {
-      title: "Not Found",
-    };
+    return { title: "Not Found" };
   }
 
   return {
@@ -38,7 +36,7 @@ export async function generateMetadata({
       description: item.excerpt,
       images: [
         {
-          url: `${site.url}/opengraph-image.png`,
+          url: `${site.url}/opengraph-image`,
           width: 1200,
           height: 630,
           alt: item.title,
@@ -61,7 +59,7 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
     .slice(0, 2);
 
   return (
-    <main className="flex-1 bg-paper">
+    <main className="flex-1 bg-bg">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -71,36 +69,33 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
             name: item.title,
             description: item.excerpt,
             about: item.category,
-            author: {
-              "@type": "Person",
-              name: site.name,
-            },
+            author: { "@type": "Person", name: site.name },
             url: `${site.url}/portfolio/${item.id}`,
           }),
         }}
       />
-      <section className="bg-sand pb-16 pt-20 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-32">
+      <section className="border-b border-border bg-surface pb-16 pt-20 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-32">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link
             href="/#portfolio"
-            className="mb-6 inline-flex items-center font-mono text-xs uppercase tracking-[0.06em] text-ink-60 hover:text-ink"
+            className="mb-6 inline-flex items-center font-mono text-xs uppercase tracking-[0.12em] text-text-muted hover:text-text"
           >
             ← Back to work
           </Link>
 
-          <span className="mb-4 inline-block font-mono text-[10px] uppercase tracking-[0.06em] text-pen">
+          <span className="mb-4 inline-block font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
             {item.category}
           </span>
 
-          <h1 className="mb-6 font-serif text-3xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-4xl md:text-5xl">
+          <h1 className="mb-6 font-display text-3xl font-semibold leading-[1.15] tracking-tight text-text sm:text-4xl md:text-5xl">
             {item.title}
           </h1>
 
-          <p className="mb-8 font-serif text-xl leading-relaxed text-ink sm:text-2xl">
+          <p className="mb-8 text-xl leading-relaxed text-text/70">
             {item.excerpt}
           </p>
 
-          <div className="flex flex-wrap gap-4 border-y border-ink/10 py-4 font-mono text-[10px] uppercase tracking-[0.06em] text-ink-60">
+          <div className="flex flex-wrap gap-4 border-y border-border py-4 font-mono text-[10px] uppercase tracking-[0.1em] text-text-muted">
             {item.client && <span>Client: {item.client}</span>}
             {item.industry && <span>Industry: {item.industry}</span>}
             <span>{item.wordCount.toLocaleString()} words</span>
@@ -112,29 +107,19 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
       <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12">
-            <h2 className="mb-4 font-serif text-2xl font-semibold text-ink">
+            <h2 className="mb-4 font-display text-2xl font-semibold text-text">
               The brief
             </h2>
-            <p className="leading-[1.7] text-ink-60">{item.content}</p>
+            <p className="leading-[1.7] text-text/60">{item.content}</p>
           </div>
 
           <div className="flex flex-wrap gap-4">
-            {item.link && (
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-moss px-8 py-3 font-mono text-xs font-medium uppercase tracking-[0.06em] text-paper transition-colors hover:bg-ink"
-              >
-                View live project
-              </a>
-            )}
             {item.pdf && (
               <a
                 href={item.pdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center border border-ink px-8 py-3 font-mono text-xs font-medium uppercase tracking-[0.06em] text-ink transition-colors hover:bg-sand"
+                className="inline-flex items-center justify-center border border-accent bg-accent px-8 py-3 font-mono text-xs font-medium uppercase tracking-[0.06em] text-bg transition-colors hover:bg-accent/90"
               >
                 Download PDF
               </a>
@@ -144,26 +129,25 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
       </section>
 
       {relatedSamples.length > 0 && (
-        <section className="border-t border-ink/10 bg-sand py-16 sm:py-20">
+        <section className="border-t border-border bg-surface py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <h2 className="mb-8 font-serif text-2xl font-semibold text-ink">
+            <h2 className="mb-8 font-display text-2xl font-semibold text-text">
               Related samples
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="grid gap-px bg-border sm:grid-cols-2">
               {relatedSamples.map((sample) => (
                 <Link
                   key={sample.id}
                   href={`/portfolio/${sample.id}`}
-                  className="group block bg-paper p-6 transition-shadow hover:shadow-md"
+                  className="group block bg-bg p-6 transition-colors hover:bg-surface-alt"
                 >
-                  <span className="mb-2 inline-block font-mono text-[10px] uppercase tracking-[0.06em] text-pen">
+                  <span className="mb-2 inline-block font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
                     {sample.category}
                   </span>
-                  <h3 className="relative mb-2 inline-block font-serif text-xl font-semibold text-ink">
+                  <h3 className="mb-2 font-display text-xl font-semibold text-text group-hover:text-accent transition-colors">
                     {sample.title}
-                    <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-pen transition-all group-hover:w-full" />
                   </h3>
-                  <p className="text-sm leading-relaxed text-ink-60">
+                  <p className="text-sm leading-relaxed text-text-muted">
                     {sample.excerpt}
                   </p>
                 </Link>

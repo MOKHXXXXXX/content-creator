@@ -1,3 +1,30 @@
+jest.mock("framer-motion", () => ({
+  motion: {
+    div: "div",
+    span: "span",
+    path: "path",
+    svg: "svg",
+    header: "header",
+    a: "a",
+    button: "button",
+    li: "li",
+    ul: "ul",
+    section: "section",
+    p: "p",
+  },
+  AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
+  useReducedMotion: () => null,
+  useScroll: () => ({
+    scrollY: { get: () => 0, onChange: jest.fn(), on: jest.fn(), clearListeners: jest.fn() },
+    scrollYProgress: { get: () => 0, onChange: jest.fn(), on: jest.fn(), clearListeners: jest.fn() },
+  }),
+  useMotionValueEvent: jest.fn(),
+  useInView: () => [jest.fn(), true],
+  useAnimation: () => ({ start: jest.fn(), stop: jest.fn() }),
+  useTransform: jest.fn(() => ({ get: () => 0 })),
+  useMotionValue: jest.fn(() => ({ get: () => 0, set: jest.fn() })),
+}));
+
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Navbar } from "@/components/Navbar";
 
@@ -42,7 +69,6 @@ describe("Navbar", () => {
     expect(toggleButton).toHaveAttribute("aria-expanded", "true");
 
     const aboutLinks = screen.getAllByText("About");
-    // Click the mobile menu link (second one, visible when expanded)
     fireEvent.click(aboutLinks[1]);
     expect(toggleButton).toHaveAttribute("aria-expanded", "false");
   });

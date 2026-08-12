@@ -16,18 +16,18 @@ export default async function Image() {
           justifyContent: "center",
           width: "100%",
           height: "100%",
-          background: "#FBF6EC",
+          background: "#0A0E14",
           padding: "80px 100px",
-          fontFamily: "Georgia, serif",
+          fontFamily: "sans-serif",
         }}
       >
         <p
           style={{
             fontSize: 18,
-            fontFamily: "Arial, sans-serif",
-            color: "#888",
+            fontFamily: "monospace",
+            color: "#5D6778",
             textTransform: "uppercase",
-            letterSpacing: "0.12em",
+            letterSpacing: "0.15em",
             marginBottom: 24,
           }}
         >
@@ -35,15 +35,15 @@ export default async function Image() {
         </p>
         <h1
           style={{
-            fontSize: 68,
+            fontSize: 64,
             fontWeight: 700,
-            color: "#211E1B",
+            color: "#D6DEEB",
             lineHeight: 1.05,
             marginBottom: 16,
             maxWidth: 900,
           }}
         >
-          I Write Content That Helps Startups Grow
+          <span style={{ color: "#FF6B35" }}>I write copy that converts</span> for growing brands.
         </h1>
         <div
           style={{
@@ -55,20 +55,19 @@ export default async function Image() {
         >
           <div
             style={{
-              width: 40,
+              width: 32,
               height: 2,
-              background: "#C1392B",
+              background: "#FF6B35",
             }}
           />
           <p
             style={{
-              fontSize: 28,
-              fontFamily: "Arial, sans-serif",
-              color: "#211E1B",
+              fontSize: 24,
+              color: "#5CCFE6",
               fontWeight: 600,
             }}
           >
-            Youssef Mohey
+            Youssef Mohey
           </p>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowRight, CheckCircle, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name is too short").max(100),
@@ -18,12 +18,11 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 const services = [
   { value: "", label: "Select a service (optional)" },
-  { value: "Copywriting", label: "Copywriting" },
-  { value: "Blog Posts", label: "Blog Posts" },
-  { value: "SEO Content", label: "SEO Content" },
-  { value: "Social Media", label: "Social Media" },
-  { value: "Email Newsletters", label: "Email Newsletters" },
-  { value: "Website Content", label: "Website Content" },
+  { value: "Blog & SEO Content", label: "Blog & SEO Content" },
+  { value: "Landing Page Copy", label: "Landing Page Copy" },
+  { value: "Email Sequences", label: "Email Sequences" },
+  { value: "Case Studies", label: "Case Studies" },
+  { value: "Social & Launch Content", label: "Social & Launch Content" },
   { value: "Other", label: "Other" },
 ];
 
@@ -71,21 +70,18 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-start gap-4">
-        <div className="flex items-center gap-3 text-paper">
-          <CheckCircle className="h-6 w-6" />
-          <span className="font-serif text-xl font-semibold">
-            Message sent
-          </span>
+      <div className="flex flex-col items-start gap-4 border border-accent-green/30 bg-accent-green/5 p-8">
+        <div className="font-mono text-[10px] uppercase tracking-[0.12em] text-accent-green">
+          Message sent ✓
         </div>
-        <p className="text-paper/80">
-          Thanks for reaching out. I'll get back to you within 1–2 business
+        <p className="text-sm text-text/70">
+          Thanks for reaching out. I&apos;ll get back to you within 1–2 business
           days.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-2 font-mono text-xs uppercase tracking-[0.06em] text-paper underline underline-offset-4 hover:text-sand"
+          className="mt-2 font-mono text-xs uppercase tracking-[0.06em] text-accent underline underline-offset-4 hover:text-accent/80"
         >
           Send another message
         </button>
@@ -99,7 +95,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="name"
-            className="mb-2 block font-mono text-[10px] uppercase tracking-[0.06em] text-paper/60"
+            className="mb-2 block font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted"
           >
             Name
           </label>
@@ -107,11 +103,11 @@ export function ContactForm() {
             id="name"
             type="text"
             {...register("name")}
-            className="w-full border-0 border-b border-paper/30 bg-transparent py-2 text-paper placeholder:text-paper/30 focus:border-paper focus:outline-none"
+            className="w-full border-0 border-b border-border bg-transparent py-2 text-text placeholder:text-text-muted/40 focus:border-accent focus:outline-none"
             placeholder="Your name"
           />
           {errors.name && (
-            <p className="mt-2 font-mono text-[10px] text-pen">
+            <p className="mt-2 font-mono text-[10px] text-accent">
               {errors.name.message}
             </p>
           )}
@@ -120,7 +116,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="mb-2 block font-mono text-[10px] uppercase tracking-[0.06em] text-paper/60"
+            className="mb-2 block font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted"
           >
             Email
           </label>
@@ -128,11 +124,11 @@ export function ContactForm() {
             id="email"
             type="email"
             {...register("email")}
-            className="w-full border-0 border-b border-paper/30 bg-transparent py-2 text-paper placeholder:text-paper/30 focus:border-paper focus:outline-none"
+            className="w-full border-0 border-b border-border bg-transparent py-2 text-text placeholder:text-text-muted/40 focus:border-accent focus:outline-none"
             placeholder="you@company.com"
           />
           {errors.email && (
-            <p className="mt-2 font-mono text-[10px] text-pen">
+            <p className="mt-2 font-mono text-[10px] text-accent">
               {errors.email.message}
             </p>
           )}
@@ -142,20 +138,20 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="service"
-          className="mb-2 block font-mono text-[10px] uppercase tracking-[0.06em] text-paper/60"
+          className="mb-2 block font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted"
         >
           Service
         </label>
         <select
           id="service"
           {...register("service")}
-          className="w-full border-0 border-b border-paper/30 bg-transparent py-2 text-paper focus:border-paper focus:outline-none"
+          className="w-full border-0 border-b border-border bg-transparent py-2 text-text focus:border-accent focus:outline-none"
         >
           {services.map((service) => (
             <option
               key={service.value}
               value={service.value}
-              className="bg-moss text-paper"
+              className="bg-surface text-text"
             >
               {service.label}
             </option>
@@ -166,7 +162,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="mb-2 block font-mono text-[10px] uppercase tracking-[0.06em] text-paper/60"
+          className="mb-2 block font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted"
         >
           Message
         </label>
@@ -174,11 +170,11 @@ export function ContactForm() {
           id="message"
           rows={4}
           {...register("message")}
-          className="w-full resize-none border-0 border-b border-paper/30 bg-transparent py-2 text-paper placeholder:text-paper/30 focus:border-paper focus:outline-none"
+          className="w-full resize-none border-0 border-b border-border bg-transparent py-2 text-text placeholder:text-text-muted/40 focus:border-accent focus:outline-none"
           placeholder="Tell me about your project..."
         />
         {errors.message && (
-          <p className="mt-2 font-mono text-[10px] text-pen">
+          <p className="mt-2 font-mono text-[10px] text-accent">
             {errors.message.message}
           </p>
         )}
@@ -193,24 +189,21 @@ export function ContactForm() {
       />
 
       {status === "error" && (
-        <p className="font-mono text-[10px] text-pen">{errorMessage}</p>
+        <p className="font-mono text-[10px] text-accent">{errorMessage}</p>
       )}
 
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center gap-2 bg-paper px-8 py-3 font-mono text-xs font-medium uppercase tracking-[0.06em] text-moss transition-colors hover:bg-sand disabled:opacity-50"
+        className="inline-flex items-center gap-2 border border-accent bg-accent px-8 py-3 font-mono text-sm font-medium uppercase tracking-[0.06em] text-bg transition-colors hover:bg-accent/90 disabled:opacity-50"
       >
         {status === "submitting" ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" />
-            Sending...
+            Sending
           </>
         ) : (
-          <>
-            Send message
-            <ArrowRight className="h-4 w-4" />
-          </>
+          "Send message →"
         )}
       </button>
     </form>
