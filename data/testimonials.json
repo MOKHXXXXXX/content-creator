@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "name": "Sarah Jenkins",
+    "role": "Marketing Director",
+    "company": "TechFlow SaaS",
+    "quote": "Alex consistently delivers content that ranks and converts. Our blog traffic doubled within six months of working together."
+  },
+  {
+    "id": "2",
+    "name": "Michael Chen",
+    "role": "Founder",
+    "company": "PaySwift",
+    "quote": "The landing page copy Alex wrote captured our brand voice perfectly and helped increase our signup rate by 35%."
+  },
+  {
+    "id": "3",
+    "name": "Emma Rodriguez",
+    "role": "Brand Manager",
+    "company": "GreenThread",
+    "quote": "Creative, reliable, and deeply strategic. Alex's social captions brought our launch campaign to life."
+  }
+]

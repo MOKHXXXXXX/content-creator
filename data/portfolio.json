@@ -1,0 +1,58 @@
+[
+  {
+    "id": "seo-startup-guide",
+    "title": "10 SEO Tips for Startups",
+    "category": "SEO",
+    "excerpt": "A comprehensive guide that helped a SaaS startup increase organic traffic by 40% in three months.",
+    "content": "This long-form article covered keyword research, on-page optimization, technical SEO basics, and link-building strategies tailored for early-stage startups. The piece was optimized for featured snippets and built around high-intent keywords identified through competitive research.",
+    "client": "TechFlow SaaS",
+    "industry": "Technology",
+    "wordCount": 1840,
+    "readTime": "8 min",
+    "thumbnail": "/images/portfolio-1.jpg",
+    "link": "https://example.com/seo-startup-guide",
+    "pdf": "/pdfs/seo-startup-guide.pdf"
+  },
+  {
+    "id": "fintech-landing-page",
+    "title": "Fintech Landing Page Copy",
+    "category": "COPY",
+    "excerpt": "Conversion-focused landing page copy for a fintech app launch campaign.",
+    "content": "Developed the headline, value proposition, feature sections, testimonials, and CTA copy for a new fintech product landing page. The copy emphasized security, speed, and simplicity while maintaining a trustworthy, modern tone.",
+    "client": "PaySwift",
+    "industry": "Finance",
+    "wordCount": 420,
+    "readTime": "2 min",
+    "thumbnail": "/images/portfolio-2.jpg",
+    "link": "https://example.com/payswift-landing",
+    "pdf": "/pdfs/fintech-landing-page.pdf"
+  },
+  {
+    "id": "wellness-blog-series",
+    "title": "Wellness Blog Series",
+    "category": "BLOG",
+    "excerpt": "A 5-part blog series on mindful productivity for a wellness brand.",
+    "content": "Created a cohesive series exploring mindfulness, work-life balance, sleep hygiene, digital detox, and sustainable habits. Each post was backed by research, written in a warm voice, and optimized for social sharing.",
+    "client": "Mindful Living Co.",
+    "industry": "Wellness",
+    "wordCount": 3200,
+    "readTime": "14 min",
+    "thumbnail": "/images/portfolio-3.jpg",
+    "link": "https://example.com/wellness-series",
+    "pdf": "/pdfs/wellness-blog-series.pdf"
+  },
+  {
+    "id": "ecommerce-social-campaign",
+    "title": "E-Commerce Social Campaign",
+    "category": "SOCIAL",
+    "excerpt": "Month-long Instagram caption campaign for a sustainable fashion launch.",
+    "content": "Wrote 30+ captions for an e-commerce brand's product launch campaign, balancing storytelling, product highlights, and community engagement. The campaign achieved a 25% higher engagement rate than previous launches.",
+    "client": "GreenThread",
+    "industry": "Fashion",
+    "wordCount": 180,
+    "readTime": "1 min",
+    "thumbnail": "/images/portfolio-4.jpg",
+    "link": "https://example.com/greenthread-campaign",
+    "pdf": "/pdfs/ecommerce-social-campaign.pdf"
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "platform": "LinkedIn",
+    "url": "https://linkedin.com/in/alexmorganwrites",
+    "icon": "Linkedin"
+  },
+  {
+    "platform": "Twitter",
+    "url": "https://twitter.com/alexmorganwrites",
+    "icon": "Twitter"
+  },
+  {
+    "platform": "Medium",
+    "url": "https://medium.com/@alexmorganwrites",
+    "icon": "BookOpen"
+  },
+  {
+    "platform": "Email",
+    "url": "mailto:hello@alexmorganwrites.com",
+    "icon": "Mail"
+  }
+]
