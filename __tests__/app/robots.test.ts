@@ -19,7 +19,7 @@ describe("robots.txt", () => {
   it("points to the sitemap", () => {
     const result = robotsFn();
     expect(result.sitemap).toBe(
-      "https://youssef-writer.vercel.app/sitemap.xml"
+      "https://youssefmohey.vercel.app/sitemap.xml"
     );
   });
 });

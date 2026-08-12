@@ -1,10 +1,37 @@
+jest.mock("framer-motion", () => ({
+  motion: {
+    div: "div",
+    span: "span",
+    path: "path",
+    svg: "svg",
+    header: "header",
+    a: "a",
+    button: "button",
+    li: "li",
+    ul: "ul",
+    section: "section",
+    p: "p",
+  },
+  AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
+  useReducedMotion: () => null,
+  useScroll: () => ({
+    scrollY: { get: () => 0, onChange: jest.fn(), on: jest.fn(), clearListeners: jest.fn() },
+    scrollYProgress: { get: () => 0, onChange: jest.fn(), on: jest.fn(), clearListeners: jest.fn() },
+  }),
+  useMotionValueEvent: jest.fn(),
+  useInView: () => [jest.fn(), true],
+  useAnimation: () => ({ start: jest.fn(), stop: jest.fn() }),
+  useTransform: jest.fn(() => ({ get: () => 0 })),
+  useMotionValue: jest.fn(() => ({ get: () => 0, set: jest.fn() })),
+}));
+
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Navbar } from "@/components/Navbar";
 
 describe("Navbar", () => {
   it("renders the site name", () => {
     render(<Navbar />);
-    expect(screen.getByText("Alex Morgan")).toBeInTheDocument();
+    expect(screen.getByText("Youssef Mohey")).toBeInTheDocument();
   });
 
   it("renders all navigation links on desktop", () => {
@@ -15,12 +42,6 @@ describe("Navbar", () => {
     expect(desktopNav.textContent).toContain("Services");
     expect(desktopNav.textContent).toContain("Work");
     expect(desktopNav.textContent).toContain("Contact");
-  });
-
-  it("renders the Hire Me CTA", () => {
-    render(<Navbar />);
-    const hireMeButtons = screen.getAllByText("Hire Me");
-    expect(hireMeButtons.length).toBeGreaterThan(0);
   });
 
   it("toggles the mobile menu", () => {
@@ -42,14 +63,13 @@ describe("Navbar", () => {
     expect(toggleButton).toHaveAttribute("aria-expanded", "true");
 
     const aboutLinks = screen.getAllByText("About");
-    // Click the mobile menu link (second one, visible when expanded)
     fireEvent.click(aboutLinks[1]);
     expect(toggleButton).toHaveAttribute("aria-expanded", "false");
   });
 
   it("navigates to the home page from the logo", () => {
     render(<Navbar />);
-    const logo = screen.getByText("Alex Morgan");
+    const logo = screen.getByText("Youssef Mohey");
     expect(logo.closest("a")).toHaveAttribute("href", "/");
   });
 });

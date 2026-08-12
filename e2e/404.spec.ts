@@ -11,6 +11,7 @@ test.describe("404 page", () => {
   test("404 page has a link back to home", async ({ page }) => {
     await page.goto("/nonexistent", { waitUntil: "domcontentloaded" });
     await page.getByRole("link", { name: /return/i }).click();
+    await page.waitForURL("/");
     await expect(page).toHaveURL("/");
   });
 

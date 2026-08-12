@@ -5,16 +5,16 @@ describe("Contact section", () => {
   it("renders the heading", () => {
     render(<Contact />);
     expect(
-      screen.getByText("Let's start a new draft.")
+      screen.getByText("Let's work together.")
     ).toBeInTheDocument();
   });
 
   it("renders the email link", () => {
     render(<Contact />);
-    const emailLink = screen.getByText(/hello@alexmorganwrites.com/i);
-    expect(emailLink.closest("a")).toHaveAttribute(
+    const emailLink = screen.getByText(/moktarmoha17@gmail.com/i);
+    expect(emailLink).toHaveAttribute(
       "href",
-      "mailto:hello@alexmorganwrites.com"
+      "mailto:moktarmoha17@gmail.com"
     );
   });
 

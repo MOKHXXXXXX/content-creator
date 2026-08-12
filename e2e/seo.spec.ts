@@ -5,7 +5,7 @@ test.describe("SEO and static assets", () => {
     const response = await request.get("/sitemap.xml");
     expect(response.status()).toBe(200);
     const body = await response.text();
-    expect(body).toContain("youssef-writer.vercel.app");
+    expect(body).toContain("youssefmohey.vercel.app");
     expect(body).toContain("portfolio");
   });
 
@@ -17,8 +17,8 @@ test.describe("SEO and static assets", () => {
     expect(body).toContain("Disallow: /api/");
   });
 
-  test("opengraph-image.png returns 200", async ({ request }) => {
-    const response = await request.get("/opengraph-image.png");
+  test("opengraph-image returns 200", async ({ request }) => {
+    const response = await request.get("/opengraph-image");
     expect(response.status()).toBe(200);
     expect(response.headers()["content-type"]).toContain("image/png");
   });

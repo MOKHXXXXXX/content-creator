@@ -14,7 +14,7 @@ test.describe("Home page", () => {
       page.getByRole("link", { name: /start a project/i })
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: /browse work/i })
+      page.getByRole("link", { name: /view work/i })
     ).toBeVisible();
   });
 
@@ -27,6 +27,6 @@ test.describe("Home page", () => {
   });
 
   test("renders the site name in the navbar", async ({ page }) => {
-    await expect(page.getByText("Alex Morgan").first()).toBeVisible();
+    await expect(page.getByText("Youssef Mohey").first()).toBeVisible();
   });
 });

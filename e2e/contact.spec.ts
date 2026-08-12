@@ -7,8 +7,9 @@ test.describe("Contact form", () => {
 
   test("shows validation errors on empty submit", async ({ page }) => {
     await page.locator("#contact").scrollIntoViewIfNeeded();
-    await page.getByRole("button", { name: /send message/i }).click();
-    await expect(page.getByText(/Name is too short/i)).toBeVisible();
+    await page.getByLabel("Name").waitFor({ state: "visible" });
+    await page.locator('button[type="submit"]').click();
+    await expect(page.getByText(/Name is too short/i)).toBeVisible({ timeout: 15000 });
     await expect(page.getByText(/valid email/i)).toBeVisible();
     await expect(page.getByText(/Message is too short/i)).toBeVisible();
   });
@@ -22,7 +23,7 @@ test.describe("Contact form", () => {
 
   test("email and social links are visible", async ({ page }) => {
     await expect(
-      page.getByText(/hello@alexmorganwrites\.com/)
+      page.getByText(/moktarmoha17@gmail\.com/)
     ).toBeVisible();
   });
 

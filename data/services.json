@@ -1,38 +1,32 @@
 [
   {
-    "id": "copywriting",
-    "title": "Copywriting",
-    "tag": "COPY",
-    "description": "Persuasive website copy, landing pages, ads, and sales content designed to convert readers into customers."
-  },
-  {
     "id": "blog-posts",
-    "title": "Blog Posts",
+    "title": "Blog & SEO Content",
     "tag": "BLOG",
-    "description": "Well-researched, engaging blog articles that educate your audience and position you as an industry authority."
+    "description": "Long-form articles, listicles, how-to guides, and pillar pages that rank on Google and bring qualified startup founders to your site."
   },
   {
-    "id": "seo-content",
-    "title": "SEO Content",
-    "tag": "SEO",
-    "description": "Keyword-optimized content that ranks on search engines and brings qualified organic traffic to your site."
+    "id": "landing-pages",
+    "title": "Landing Page Copy",
+    "tag": "COPY",
+    "description": "Heroes, features, testimonials, and CTAs written to convert visitors into trial signups, demo bookings, and paying customers."
   },
   {
-    "id": "social-media",
-    "title": "Social Media Captions",
-    "tag": "SOCIAL",
-    "description": "Scroll-stopping captions and content calendars that build community and spark engagement."
-  },
-  {
-    "id": "email-newsletters",
-    "title": "Email Newsletters",
+    "id": "email-sequences",
+    "title": "Email Sequences",
     "tag": "EMAIL",
-    "description": "Compelling email sequences and newsletters that nurture leads and keep your audience coming back."
+    "description": "Welcome flows, nurture drips, re-engagement campaigns, and launch sequences that guide users from signup to activation."
   },
   {
-    "id": "website-content",
-    "title": "Website Content",
-    "tag": "WEB",
-    "description": "Clear, professional web pages that communicate your brand story and guide visitors to take action."
+    "id": "case-studies",
+    "title": "Case Studies",
+    "tag": "CASE",
+    "description": "Customer success narratives that turn user outcomes into sales collateral — problem, solution, results, and social proof."
+  },
+  {
+    "id": "social-content",
+    "title": "Social & Launch Content",
+    "tag": "SOCIAL",
+    "description": "LinkedIn threads, Twitter/X posts, product launch teasers, and multi-channel content calendars that build buzz around your brand."
   }
 ]

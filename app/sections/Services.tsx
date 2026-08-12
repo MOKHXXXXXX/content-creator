@@ -2,30 +2,30 @@ import services from "@/data/services.json";
 
 export function Services() {
   return (
-    <section id="services" className="bg-paper py-20 sm:py-24 lg:py-32">
+    <section id="services" className="border-b border-border py-20 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 max-w-3xl">
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.06em] text-ink-60">
-            ✎ Services
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.12em] text-text-muted">
+            Services
           </p>
-          <h2 className="font-serif text-3xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-4xl">
+          <h2 className="font-display text-3xl font-semibold leading-[1.15] tracking-tight text-text sm:text-4xl">
             What I can write for you
           </h2>
         </div>
 
-        <div className="grid gap-px bg-ink/10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
             <div
               key={service.id}
-              className="bg-sand p-6 transition-colors hover:bg-paper sm:p-8"
+              className="border border-border bg-bg p-6 transition-colors hover:bg-surface-alt sm:p-8 group"
             >
-              <span className="mb-4 inline-block font-mono text-[10px] uppercase tracking-[0.06em] text-ink-60">
+              <span className="mb-4 inline-block font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
                 {service.tag}
               </span>
-              <h3 className="mb-3 font-serif text-xl font-semibold text-ink sm:text-2xl">
+              <h3 className="mb-3 font-display text-xl font-semibold text-text group-hover:text-accent transition-colors">
                 {service.title}
               </h3>
-              <p className="text-sm leading-relaxed text-ink-60">
+              <p className="text-sm leading-relaxed text-text-muted">
                 {service.description}
               </p>
             </div>

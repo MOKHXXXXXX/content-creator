@@ -1,23 +1,23 @@
 [
   {
     "id": "1",
-    "name": "Sarah Jenkins",
-    "role": "Marketing Director",
-    "company": "TechFlow SaaS",
-    "quote": "Alex consistently delivers content that ranks and converts. Our blog traffic doubled within six months of working together."
+    "name": "Salma Adel",
+    "role": "Head of Growth",
+    "company": "StackFlow",
+    "quote": "Youssef doesn't just write — he thinks like a product person. The blog post he wrote for us cut through the noise and ranked top 3 in six weeks. We got 12 demo requests from that single article."
   },
   {
     "id": "2",
-    "name": "Michael Chen",
-    "role": "Founder",
-    "company": "PaySwift",
-    "quote": "The landing page copy Alex wrote captured our brand voice perfectly and helped increase our signup rate by 35%."
+    "name": "Omar El-Sayed",
+    "role": "Co-Founder",
+    "company": "DevKit.io",
+    "quote": "Our beta launch was make-or-break, and Youssef's email sequence was the highest-converting channel we had. 10K signups in 30 days. I've recommended him to every founder I know."
   },
   {
     "id": "3",
-    "name": "Emma Rodriguez",
-    "role": "Brand Manager",
-    "company": "GreenThread",
-    "quote": "Creative, reliable, and deeply strategic. Alex's social captions brought our launch campaign to life."
+    "name": "Nour Hassan",
+    "role": "VP of Marketing",
+    "company": "PaySwift",
+    "quote": "The landing page Youssef wrote converted at 4.8% in month one — more than double our benchmark. He nails the balance between brand voice and conversion copy."
   }
 ]

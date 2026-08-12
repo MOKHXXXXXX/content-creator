@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
+import { Sora, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/app/sections/Footer";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -16,8 +16,8 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
 });
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: `${site.url}/opengraph-image.png`,
+        url: `${site.url}/opengraph-image`,
         width: 1200,
         height: 630,
         alt: `${site.name} — ${site.title}`,
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} — ${site.title}`,
     description: site.description,
-    images: [`${site.url}/opengraph-image.png`],
+    images: [`${site.url}/opengraph-image`],
   },
 };
 
@@ -56,9 +56,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${sora.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-paper text-ink">
+      <body className="flex min-h-full flex-col bg-bg text-text">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -72,9 +72,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 url: site.url,
                 email: site.email,
                 sameAs: [
-                  "https://linkedin.com/in/youssefmorgan",
-                  "https://twitter.com/youssefmorgan",
-                  "https://medium.com/@youssefmorgan",
+                  "https://linkedin.com/in/youssefmohey",
+                  "https://twitter.com/youssefmohey",
+                  "https://medium.com/@youssefmohey",
                 ],
               },
               {
