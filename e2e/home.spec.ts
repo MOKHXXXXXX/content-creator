@@ -27,6 +27,6 @@ test.describe("Home page", () => {
   });
 
   test("renders the site name in the navbar", async ({ page }) => {
-    await expect(page.getByText("Alex Morgan").first()).toBeVisible();
+    await expect(page.getByText("Youssef Mohey").first()).toBeVisible();
   });
 });

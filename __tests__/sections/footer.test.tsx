@@ -4,7 +4,7 @@ import { Footer } from "@/app/sections/Footer";
 describe("Footer", () => {
   it("renders the copyright", () => {
     render(<Footer />);
-    expect(screen.getByText(/Alex Morgan/i)).toBeInTheDocument();
+    expect(screen.getByText(/Youssef Mohey/i)).toBeInTheDocument();
   });
 
   it("renders the privacy policy link", () => {

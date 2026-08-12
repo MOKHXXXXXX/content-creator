@@ -25,9 +25,9 @@ describe("Testimonials section", () => {
   it("renders testimonial client names in both desktop and mobile views", () => {
     render(<Testimonials />);
     // Client names appear both in desktop annotation cards and mobile carousel
-    expect(screen.getAllByText("Sarah Jenkins").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Michael Chen").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Emma Rodriguez").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Priya Sharma").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("David Kim").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Lena Okafor").length).toBeGreaterThan(0);
   });
 
   it("renders navigation arrows on mobile", () => {

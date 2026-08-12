@@ -9,20 +9,20 @@ describe("portfolio detail page", () => {
       const params = await generateStaticParams();
       expect(params.length).toBe(4);
       const slugs = params.map((p) => p.slug);
-      expect(slugs).toContain("seo-startup-guide");
-      expect(slugs).toContain("fintech-landing-page");
-      expect(slugs).toContain("wellness-blog-series");
-      expect(slugs).toContain("ecommerce-social-campaign");
+      expect(slugs).toContain("activation-reduction-blog");
+      expect(slugs).toContain("fintech-landing-copy");
+      expect(slugs).toContain("beta-launch-email-sequence");
+      expect(slugs).toContain("product-led-seo-guide");
     });
   });
 
   describe("generateMetadata", () => {
     it("returns metadata for a valid slug", async () => {
       const metadata = await generateMetadata({
-        params: Promise.resolve({ slug: "seo-startup-guide" }),
+        params: Promise.resolve({ slug: "activation-reduction-blog" }),
       });
-      expect(metadata.title).toContain("10 SEO Tips for Startups");
-      expect(metadata.description).toContain("organic traffic");
+      expect(metadata.title).toContain("How We Cut Activation Time");
+      expect(metadata.description).toContain("activation patterns");
       expect(metadata.openGraph?.images?.[0]).toBeDefined();
     });
 

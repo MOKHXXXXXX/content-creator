@@ -4,7 +4,7 @@ import { Hero } from "@/app/sections/Hero";
 describe("Hero", () => {
   it("renders the meta label and headline", () => {
     render(<Hero />);
-    expect(screen.getByText(/Content Writer & Copywriter/i)).toBeInTheDocument();
+    expect(screen.getByText(/Content Writer for Startups/i)).toBeInTheDocument();
     expect(screen.getByText("I write")).toBeInTheDocument();
   });
 

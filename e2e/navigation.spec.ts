@@ -23,7 +23,7 @@ test.describe("Navigation", () => {
 
   test("logo navigates to home", async ({ page }) => {
     await page.goto("/privacy", { waitUntil: "domcontentloaded" });
-    await page.getByText("Alex Morgan").first().click();
+    await page.getByText("Youssef Mohey").first().click();
     await expect(page).toHaveURL("http://localhost:3000/");
   });
 });

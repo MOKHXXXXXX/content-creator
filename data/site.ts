@@ -1,19 +1,19 @@
 export const site = {
-  name: "Alex Morgan",
-  title: "Content Writer & Copywriter",
-  headline: "Words That Convert, Content That Connects",
+  name: "Youssef Mohey",
+  title: "Content Writer for Startups",
+  headline: "I Write Content That Helps Startups Grow",
   subheadline:
-    "I help brands and businesses tell stories that engage readers, build trust, and drive results.",
-  email: "hello@alexmorganwrites.com",
-  url: "https://youssef-writer.vercel.app",
+    "From blog posts and landing pages to email sequences and case studies — I help early-stage and growth startups turn complex ideas into clear, compelling content that drives users and revenue.",
+  email: "moktarmoha17@gmail.com",
+  url: "https://youssefmohey.vercel.app",
   description:
-    "Professional content writer specializing in SEO content, blog posts, copywriting, and social media captions.",
+    "Youssef Mohey is a content writer specializing in startup content strategy, B2B SaaS copywriting, SEO blogging, and product storytelling for early-stage and growth companies.",
   keywords: [
-    "content writer",
-    "copywriter",
-    "SEO content",
-    "blog writer",
-    "freelance writer",
+    "startup content writer",
+    "B2B SaaS copywriter",
+    "SEO blog writer",
+    "product content strategist",
+    "freelance writer for startups",
   ] as string[],
-  author: "Alex Morgan",
+  author: "Youssef Mohey",
 } as const;

@@ -11,21 +11,19 @@ describe("Services section", () => {
 
   it("renders all service cards", () => {
     render(<Services />);
-    expect(screen.getByText("Copywriting")).toBeInTheDocument();
-    expect(screen.getByText("Blog Posts")).toBeInTheDocument();
-    expect(screen.getByText("SEO Content")).toBeInTheDocument();
-    expect(screen.getByText("Social Media Captions")).toBeInTheDocument();
-    expect(screen.getByText("Email Newsletters")).toBeInTheDocument();
-    expect(screen.getByText("Website Content")).toBeInTheDocument();
+    expect(screen.getByText("Blog & SEO Content")).toBeInTheDocument();
+    expect(screen.getByText("Landing Page Copy")).toBeInTheDocument();
+    expect(screen.getByText("Email Sequences")).toBeInTheDocument();
+    expect(screen.getByText("Case Studies")).toBeInTheDocument();
+    expect(screen.getByText("Social & Launch Content")).toBeInTheDocument();
   });
 
   it("renders category tags for each service", () => {
     render(<Services />);
-    expect(screen.getByText("COPY")).toBeInTheDocument();
     expect(screen.getByText("BLOG")).toBeInTheDocument();
-    expect(screen.getByText("SEO")).toBeInTheDocument();
-    expect(screen.getByText("SOCIAL")).toBeInTheDocument();
+    expect(screen.getByText("COPY")).toBeInTheDocument();
     expect(screen.getByText("EMAIL")).toBeInTheDocument();
-    expect(screen.getByText("WEB")).toBeInTheDocument();
+    expect(screen.getByText("CASE")).toBeInTheDocument();
+    expect(screen.getByText("SOCIAL")).toBeInTheDocument();
   });
 });

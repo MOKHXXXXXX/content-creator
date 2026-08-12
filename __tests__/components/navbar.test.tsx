@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 describe("Navbar", () => {
   it("renders the site name", () => {
     render(<Navbar />);
-    expect(screen.getByText("Alex Morgan")).toBeInTheDocument();
+    expect(screen.getByText("Youssef Mohey")).toBeInTheDocument();
   });
 
   it("renders all navigation links on desktop", () => {
@@ -49,7 +49,7 @@ describe("Navbar", () => {
 
   it("navigates to the home page from the logo", () => {
     render(<Navbar />);
-    const logo = screen.getByText("Alex Morgan");
+    const logo = screen.getByText("Youssef Mohey");
     expect(logo.closest("a")).toHaveAttribute("href", "/");
   });
 });
