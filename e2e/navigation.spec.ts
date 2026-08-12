@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Navigation", () => {
+  test.use({ viewport: { width: 1280, height: 720 } });
+
   test.beforeEach(async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
   });
