@@ -32,7 +32,7 @@ test.describe("Portfolio", () => {
       waitUntil: "domcontentloaded",
     });
     await page.getByRole("link", { name: /back to work/i }).click();
-    await expect(page.url()).toContain("#portfolio");
+    await expect(page).toHaveURL(/#portfolio/);
   });
 
   test("portfolio detail page loads correctly", async ({ page }) => {
