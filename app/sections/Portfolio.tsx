@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import portfolio from "@/data/portfolio.json";
@@ -11,6 +11,11 @@ const categories = ["All", ...new Set(portfolio.map((item) => item.category))];
 export function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("All");
   const shouldReduceMotion = useReducedMotion();
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
 
   const filteredItems =
     activeFilter === "All"
@@ -49,9 +54,9 @@ export function Portfolio() {
         <motion.div
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          animate={isReady ? "visible" : "hidden"}
           variants={{
+            hidden: {},
             visible: {
               transition: {
                 staggerChildren: shouldReduceMotion ? 0 : 0.06,
@@ -63,7 +68,7 @@ export function Portfolio() {
             <motion.div
               key={item.id}
               variants={{
-                hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+                hidden: { opacity: 0, y: shouldReduceMotion === true ? 0 : 20 },
                 visible: { opacity: 1, y: 0 },
               }}
               transition={{ duration: 0.4, ease: "easeOut" }}

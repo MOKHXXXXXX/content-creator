@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import testimonials from "@/data/testimonials.json";
@@ -9,6 +9,11 @@ import { cn } from "@/lib/utils";
 export function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
   const shouldReduceMotion = useReducedMotion();
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
 
   return (
     <section id="testimonials" className="bg-paper py-20 sm:py-24 lg:py-32">
@@ -25,9 +30,12 @@ export function Testimonials() {
         <div className="relative grid gap-8 lg:grid-cols-12">
           <motion.div
             className="lg:col-span-7"
-            initial={{ opacity: shouldReduceMotion ? 1 : 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            initial={{ opacity: shouldReduceMotion === true ? 1 : 0 }}
+            animate={
+              isReady
+                ? { opacity: 1 }
+                : { opacity: shouldReduceMotion === true ? 1 : 0 }
+            }
             transition={{ duration: 0.5 }}
           >
             <blockquote className="font-serif text-2xl leading-[1.3] text-ink sm:text-3xl lg:text-4xl">
@@ -45,9 +53,12 @@ export function Testimonials() {
                 <motion.div
                   key={testimonial.id}
                   className="relative border-l-2 border-pen bg-sand p-5"
-                  initial={{ opacity: shouldReduceMotion ? 1 : 0, x: shouldReduceMotion ? 0 : 10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  initial={{ opacity: shouldReduceMotion === true ? 1 : 0, x: shouldReduceMotion === true ? 0 : 10 }}
+                  animate={
+                    isReady
+                      ? { opacity: 1, x: 0 }
+                      : { opacity: shouldReduceMotion === true ? 1 : 0, x: shouldReduceMotion === true ? 0 : 10 }
+                  }
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
                   <span className="mb-2 inline-block font-mono text-[10px] uppercase tracking-[0.06em] text-pen">
