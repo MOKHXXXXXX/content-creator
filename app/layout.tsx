@@ -4,6 +4,8 @@ import "./globals.css";
 import { site } from "@/data/site";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/app/sections/Footer";
+import { Analytics } from "@/components/Analytics";
+import { CookieConsent } from "@/components/CookieConsent";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -90,6 +92,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Navbar />
         {children}
         <Footer />
+        <CookieConsent />
+        <Analytics />
       </body>
     </html>
   );

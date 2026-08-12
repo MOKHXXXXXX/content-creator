@@ -34,6 +34,21 @@ export function Contact() {
               </div>
 
               <div>
+                <span className="mb-1 block font-mono text-[10px] uppercase tracking-[0.06em] text-paper/60">
+                  Book a call
+                </span>
+                <a
+                  href="https://calendly.com/youssefmorgan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.06em] text-paper underline underline-offset-4 transition-colors hover:text-sand"
+                >
+                  Schedule on Calendly
+                  <span className="inline-block">↗</span>
+                </a>
+              </div>
+
+              <div>
                 <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.06em] text-paper/60">
                   Connect
                 </span>

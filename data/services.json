@@ -3,42 +3,36 @@
     "id": "copywriting",
     "title": "Copywriting",
     "tag": "COPY",
-    "description": "Persuasive website copy, landing pages, ads, and sales content designed to convert readers into customers.",
-    "icon": "PenTool"
+    "description": "Persuasive website copy, landing pages, ads, and sales content designed to convert readers into customers."
   },
   {
     "id": "blog-posts",
     "title": "Blog Posts",
     "tag": "BLOG",
-    "description": "Well-researched, engaging blog articles that educate your audience and position you as an industry authority.",
-    "icon": "FileText"
+    "description": "Well-researched, engaging blog articles that educate your audience and position you as an industry authority."
   },
   {
     "id": "seo-content",
     "title": "SEO Content",
     "tag": "SEO",
-    "description": "Keyword-optimized content that ranks on search engines and brings qualified organic traffic to your site.",
-    "icon": "Search"
+    "description": "Keyword-optimized content that ranks on search engines and brings qualified organic traffic to your site."
   },
   {
     "id": "social-media",
     "title": "Social Media Captions",
     "tag": "SOCIAL",
-    "description": "Scroll-stopping captions and content calendars that build community and spark engagement.",
-    "icon": "MessageCircle"
+    "description": "Scroll-stopping captions and content calendars that build community and spark engagement."
   },
   {
     "id": "email-newsletters",
     "title": "Email Newsletters",
     "tag": "EMAIL",
-    "description": "Compelling email sequences and newsletters that nurture leads and keep your audience coming back.",
-    "icon": "Mail"
+    "description": "Compelling email sequences and newsletters that nurture leads and keep your audience coming back."
   },
   {
     "id": "website-content",
     "title": "Website Content",
     "tag": "WEB",
-    "description": "Clear, professional web pages that communicate your brand story and guide visitors to take action.",
-    "icon": "Globe"
+    "description": "Clear, professional web pages that communicate your brand story and guide visitors to take action."
   }
 ]

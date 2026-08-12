@@ -7,33 +7,121 @@ const contactSchema = z.object({
   email: z.string().email("Invalid email address"),
   service: z.string().optional(),
   message: z.string().min(10, "Message is too short").max(5000),
-  website: z.string().optional(), // honeypot field
+  website: z.string().optional(),
 });
 
-// Simple in-memory rate limiter (use Redis in production)
 const rateLimit = new Map<string, number>();
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const MAX_REQUESTS_PER_WINDOW = 5;
 
 function isRateLimited(ip: string): boolean {
-  const now = Date.now();
   const count = rateLimit.get(ip) || 0;
-
-  if (count >= MAX_REQUESTS_PER_WINDOW) {
-    return true;
-  }
-
+  if (count >= MAX_REQUESTS_PER_WINDOW) return true;
   rateLimit.set(ip, count + 1);
   setTimeout(() => {
     const current = rateLimit.get(ip) || 0;
-    if (current <= 1) {
-      rateLimit.delete(ip);
-    } else {
-      rateLimit.set(ip, current - 1);
-    }
+    if (current <= 1) rateLimit.delete(ip);
+    else rateLimit.set(ip, current - 1);
   }, RATE_LIMIT_WINDOW_MS);
-
   return false;
+}
+
+function emailTemplate(body: {
+  name: string;
+  email: string;
+  service: string | undefined;
+  message: string;
+}) {
+  const { name, email, service, message } = body;
+  const formattedMessage = message.replace(/\n/g, "<br />");
+  const serviceDisplay = service || "Not specified";
+
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;font-family:Georgia,serif;background-color:#FBF6EC;">
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#FBF6EC">
+<tr><td align="center" style="padding:40px 20px;">
+<table width="600" cellpadding="0" cellspacing="0" style="background-color:#FFFFFF;border:1px solid #EDE3CF;">
+
+<tr><td style="padding:32px 40px;border-bottom:3px solid #C1392B;">
+  <h1 style="margin:0;font-family:Georgia,serif;font-size:24px;color:#211E1B;line-height:1.2;">
+    New message from ${name}
+  </h1>
+</td></tr>
+
+<tr><td style="padding:32px 40px;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+    <tr>
+      <td style="padding:8px 0;font-family:'Courier New',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#6B655C;width:80px;">From</td>
+      <td style="padding:8px 0;font-size:16px;color:#211E1B;border-bottom:1px solid #EDE3CF;">${name}</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 0;font-family:'Courier New',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#6B655C;">Email</td>
+      <td style="padding:8px 0;font-size:16px;color:#211E1B;border-bottom:1px solid #EDE3CF;">${email}</td>
+    </tr>
+    <tr>
+      <td style="padding:8px 0;font-family:'Courier New',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#6B655C;">Service</td>
+      <td style="padding:8px 0;font-size:16px;color:#211E1B;border-bottom:1px solid #EDE3CF;">${serviceDisplay}</td>
+    </tr>
+  </table>
+
+  <div style="border-left:3px solid #C1392B;padding:16px 24px;margin:24px 0;background-color:#FBF6EC;">
+    <p style="margin:0;font-family:'Courier New',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#6B655C;margin-bottom:12px;">Message</p>
+    <p style="margin:0;font-size:16px;color:#211E1B;line-height:1.7;">${formattedMessage}</p>
+  </div>
+
+</td></tr>
+
+<tr><td style="padding:24px 40px;border-top:1px solid #EDE3CF;">
+  <p style="margin:0;font-family:'Courier New',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#6B655C;">
+    Sent via your content writer portfolio
+  </p>
+</td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
+}
+
+function autoReplyTemplate(name: string) {
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;font-family:Georgia,serif;background-color:#FBF6EC;">
+<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#FBF6EC">
+<tr><td align="center" style="padding:40px 20px;">
+<table width="600" cellpadding="0" cellspacing="0" style="background-color:#FFFFFF;border:1px solid #EDE3CF;">
+
+<tr><td style="padding:32px 40px;border-bottom:3px solid #C1392B;">
+  <h1 style="margin:0;font-family:Georgia,serif;font-size:24px;color:#211E1B;">
+    Thanks for reaching out, ${name}.
+  </h1>
+</td></tr>
+
+<tr><td style="padding:32px 40px;">
+  <p style="margin:0 0 16px 0;font-size:16px;color:#211E1B;line-height:1.7;">
+    I've received your message and will get back to you within 1–2 business days.
+  </p>
+  <p style="margin:0;font-size:14px;color:#6B655C;line-height:1.7;">
+    In the meantime, feel free to browse my portfolio or connect on LinkedIn.
+  </p>
+</td></tr>
+
+<tr><td style="padding:24px 40px;border-top:1px solid #EDE3CF;">
+  <p style="margin:0;font-family:'Courier New',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#6B655C;">
+    This is an automated confirmation.
+  </p>
+</td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>`;
 }
 
 export async function POST(request: NextRequest) {
@@ -62,50 +150,67 @@ export async function POST(request: NextRequest) {
 
     const { name, email, service, message, website } = result.data;
 
-    // Honeypot check
     if (website && website.length > 0) {
       return NextResponse.json({ success: true }, { status: 200 });
     }
 
+    const resendApiKey = process.env.RESEND_API_KEY;
     const fromEmail = process.env.FROM_EMAIL;
     const toEmail = process.env.TO_EMAIL;
 
-    if (!fromEmail || !toEmail) {
+    if (!resendApiKey) {
+      console.error("RESEND_API_KEY is not set");
       return NextResponse.json(
-        { error: "Email configuration is missing" },
+        { error: "Email service is not configured. Contact site owner." },
         { status: 500 }
       );
     }
 
-    const resend = new Resend(process.env.RESEND_API_KEY);
-
-    const { data, error } = await resend.emails.send({
-      from: `${name} <${fromEmail}>`,
-      to: [toEmail],
-      replyTo: email,
-      subject: `New contact form submission from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nService: ${service || "Not specified"}\n\nMessage:\n${message}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Service:</strong> ${service || "Not specified"}</p>
-        <hr />
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, "<br />")}</p>
-      `,
-    });
-
-    if (error) {
-      console.error("Resend error:", error);
+    if (!fromEmail || !toEmail) {
+      console.error("FROM_EMAIL or TO_EMAIL is not set");
       return NextResponse.json(
-        { error: "Failed to send email. Please try again later." },
+        { error: "Email addresses are not configured. Contact site owner." },
         { status: 500 }
       );
+    }
+
+    const resend = new Resend(resendApiKey);
+
+    const notifyHtml = emailTemplate({ name, email, service, message });
+    const autoReplyHtml = autoReplyTemplate(name);
+
+    const [notifyResult, autoResult] = await Promise.all([
+      resend.emails.send({
+        from: `Portfolio Contact <${fromEmail}>`,
+        to: [toEmail],
+        replyTo: email,
+        subject: `New message from ${name}`,
+        text: `Name: ${name}\nEmail: ${email}\nService: ${service || "Not specified"}\n\nMessage:\n${message}`,
+        html: notifyHtml,
+      }),
+      resend.emails.send({
+        from: `Portfolio Contact <${fromEmail}>`,
+        to: [email],
+        subject: "Message received — I'll be in touch soon",
+        text: `Hi ${name},\n\nThanks for reaching out. I've received your message and will get back to you within 1–2 business days.\n\nBest regards.`,
+        html: autoReplyHtml,
+      }),
+    ]);
+
+    if (notifyResult.error) {
+      console.error("Resend notification error:", notifyResult.error);
+      return NextResponse.json(
+        { error: "Failed to send message. Please try again later." },
+        { status: 500 }
+      );
+    }
+
+    if (autoResult.error) {
+      console.error("Resend auto-reply error:", autoResult.error);
     }
 
     return NextResponse.json(
-      { success: true, messageId: data?.id },
+      { success: true, messageId: notifyResult.data?.id },
       { status: 200 }
     );
   } catch (error) {

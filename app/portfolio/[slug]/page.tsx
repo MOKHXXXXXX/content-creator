@@ -33,6 +33,18 @@ export async function generateMetadata({
   return {
     title: `${item.title} — ${site.name}`,
     description: item.excerpt,
+    openGraph: {
+      title: `${item.title} — ${site.name}`,
+      description: item.excerpt,
+      images: [
+        {
+          url: `${site.url}/opengraph-image.png`,
+          width: 1200,
+          height: 630,
+          alt: item.title,
+        },
+      ],
+    },
   };
 }
 

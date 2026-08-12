@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Content Writer Portfolio
+
+A minimalist, manuscript-themed personal portfolio landing page for a professional content writer. Built with Next.js, Tailwind CSS, and TypeScript.
+
+## Tech Stack
+
+- **Framework:** Next.js 14+ (App Router)
+- **Styling:** Tailwind CSS v4
+- **Language:** TypeScript
+- **Fonts:** Fraunces (display), Inter (body), IBM Plex Mono (meta)
+- **Animations:** Framer Motion
+- **Forms:** React Hook Form + Zod
+- **Email:** Resend API
+- **Icons:** Lucide React + custom SVGs
+- **Deployment:** Vercel
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+```bash
+npm install
+```
+
+### 2. Set up environment variables
+
+Copy the example file and fill in your values:
+
+```bash
+cp .env.local.example .env.local
+```
+
+| Variable | Description |
+|---|---|
+| `RESEND_API_KEY` | API key from [resend.com/api-keys](https://resend.com/api-keys) |
+| `FROM_EMAIL` | Verified sender email in Resend (e.g. `contact@yourdomain.com`) |
+| `TO_EMAIL` | Where contact form submissions are sent |
+
+### 3. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+├── api/contact/route.ts     # Contact form API (Resend + validation)
+├── portfolio/[slug]/page.tsx # Individual portfolio detail pages
+├── sections/                # Landing page sections
+│   ├── Hero.tsx             # Hero with EditReveal animation
+│   ├── About.tsx            # Bio + expertise
+│   ├── Services.tsx         # Service cards grid
+│   ├── Portfolio.tsx        # Filterable portfolio grid
+│   ├── Testimonials.tsx     # Client testimonials
+│   ├── Contact.tsx          # Contact form + social links
+│   └── Footer.tsx           # Site footer
+├── privacy/page.tsx         # Privacy policy
+├── sitemap.ts               # Auto-generated sitemap
+├── robots.ts                # Robots config
+└── layout.tsx               # Root layout (fonts, metadata, JSON-LD)
 
-## Learn More
+components/
+├── ContactForm.tsx          # Form with React Hook Form + Zod
+├── Navbar.tsx               # Sticky navigation
+├── icon.tsx                 # Icon resolver (Lucide + custom SVGs)
+└── ui/EditReveal.tsx        # Hero strike-through animation
 
-To learn more about Next.js, take a look at the following resources:
+data/                        # ✏️ Edit these files to update content
+├── site.ts                  # Site metadata (name, URL, SEO)
+├── about.ts                 # Bio, expertise, stats
+├── portfolio.json           # Portfolio samples
+├── services.json            # Services offered
+├── testimonials.json        # Client testimonials
+└── social.json              # Social media links
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Updating Content
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All site content lives in the `data/` folder as TypeScript/JSON files. Edit them directly to update:
 
-## Deploy on Vercel
+- **Your name/tagline/email:** `data/site.ts`
+- **Bio + stats:** `data/about.ts`
+- **Portfolio items:** `data/portfolio.json`
+- **Services:** `data/services.json`
+- **Testimonials:** `data/testimonials.json`
+- **Social links:** `data/social.json`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+No CMS or database required — just edit and redeploy.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Building for Production
+
+```bash
+npm run build
+npm start
+```
+
+## Deploying to Vercel
+
+1. Push to GitHub
+2. Go to [vercel.com/import](https://vercel.com/import)
+3. Import your repository
+4. Add the environment variables from `.env.local`
+5. Deploy
+
+The site will be available at your Vercel subdomain. To use a custom domain, add it in Vercel project settings and verify your domain in Resend.
+
+## Design System
+
+| Token | Hex | Usage |
+|---|---|---|
+| `paper` | `#FBF6EC` | Primary background |
+| `ink` | `#211E1B` | Primary text |
+| `moss` | `#3F5A46` | Nav, footer, dark sections |
+| `pen` | `#C1392B` | Editor's mark — used sparingly |
+| `sand` | `#EDE3CF` | Card surfaces, dividers |
+| `ink-60` | `#6B655C` | Muted text, captions |
+
+The signature moment is the hero strike-through animation: a phrase gets struck through with a red pen stroke and replaced — mimicking an editor's correction.
