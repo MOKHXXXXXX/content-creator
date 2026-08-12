@@ -50,6 +50,23 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
 
   return (
     <main className="flex-1 bg-paper">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: item.title,
+            description: item.excerpt,
+            about: item.category,
+            author: {
+              "@type": "Person",
+              name: site.name,
+            },
+            url: `${site.url}/portfolio/${item.id}`,
+          }),
+        }}
+      />
       <section className="bg-sand pb-16 pt-20 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-32">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <Link
