@@ -5,7 +5,7 @@ describe("Portfolio section", () => {
   it("renders the heading", () => {
     render(<Portfolio />);
     expect(
-      screen.getByText(/Manuscripts worth reading/i)
+      screen.getByText(/Writing samples/i)
     ).toBeInTheDocument();
   });
 

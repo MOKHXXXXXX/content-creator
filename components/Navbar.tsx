@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
+  { href: "/#home", label: "Home" },
   { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
   { href: "#portfolio", label: "Work" },
@@ -45,17 +46,11 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="font-mono text-xs uppercase tracking-[0.06em] text-text-muted transition-colors hover:text-text"
+              className="rounded px-3 py-2 font-mono text-xs uppercase tracking-[0.06em] text-text-muted transition-colors hover:bg-accent hover:text-bg"
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="#contact"
-            className="border border-accent px-4 py-2 font-mono text-xs font-medium uppercase tracking-[0.06em] text-accent transition-all hover:bg-accent hover:text-bg"
-          >
-            Hire Me
-          </Link>
         </div>
 
         <button
@@ -80,19 +75,12 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="block px-3 py-2 font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:text-text"
+              className="block rounded px-3 py-2 font-mono text-xs uppercase tracking-[0.06em] text-text-muted hover:bg-accent hover:text-bg"
               onClick={() => setIsOpen(false)}
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="#contact"
-            className="block border border-accent px-3 py-2 text-center font-mono text-xs font-medium uppercase tracking-[0.06em] text-accent hover:bg-accent hover:text-bg"
-            onClick={() => setIsOpen(false)}
-          >
-            Hire Me
-          </Link>
         </div>
       </div>
     </header>

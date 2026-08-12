@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site } from "@/data/site";
 import social from "@/data/social.json";
 import { Icon } from "@/components/icon";
@@ -34,6 +35,13 @@ export function Footer() {
           <p className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-muted">
             © {new Date().getFullYear()} {site.name}
           </p>
+
+          <Link
+            href="/privacy"
+            className="font-mono text-[10px] uppercase tracking-[0.1em] text-text-muted transition-colors hover:text-text"
+          >
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>

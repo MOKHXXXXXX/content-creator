@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { about } from "@/data/about";
+import { site } from "@/data/site";
 
 export function About() {
   return (
@@ -12,6 +14,26 @@ export function About() {
             <h2 className="font-display text-3xl font-semibold leading-[1.15] tracking-tight text-text sm:text-4xl">
               I turn product complexity into clear, confident copy.
             </h2>
+
+            <div className="mt-10 max-w-xs">
+              <div className="overflow-hidden border border-border bg-surface-alt">
+                <div className="flex items-center justify-between border-b border-border px-3 py-2">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted">
+                    {site.name}
+                  </span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
+                    Writer
+                  </span>
+                </div>
+                <Image
+                  src="/images/portrait.jpg"
+                  alt={`Portrait of ${site.name}`}
+                  width={480}
+                  height={480}
+                  className="aspect-square w-full object-cover"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="lg:col-span-7">

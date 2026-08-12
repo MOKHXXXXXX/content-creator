@@ -1,22 +1,20 @@
 import Link from "next/link";
 import { site } from "@/data/site";
-import { TerminalReveal } from "@/components/ui/TerminalReveal";
 
 export function Hero() {
   return (
-    <section className="flex flex-1 flex-col justify-center px-4 pb-24 pt-20 sm:px-6 sm:pb-32 sm:pt-28 lg:px-8 lg:pb-40 lg:pt-36">
+    <section id="home" className="flex flex-1 flex-col justify-center px-4 pb-24 pt-20 sm:px-6 sm:pb-32 sm:pt-28 lg:px-8 lg:pb-40 lg:pt-36">
       <div className="mx-auto w-full max-w-4xl">
         <p className="mb-6 font-mono text-xs uppercase tracking-[0.12em] text-text-muted">
           {site.title}
         </p>
 
-        <h1 className="mb-8 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-          <TerminalReveal
-            prefix="I write"
-            firstPhrase="nice words"
-            finalPhrase="copy that converts"
-            suffix="for growing brands."
-          />
+        <h1 className="relative mb-8 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+          I write <span className="text-accent">copy that converts</span> for
+          growing brands.
+          <span aria-hidden="true" className="brilliant-overlay">
+            I write copy that converts for growing brands.
+          </span>
         </h1>
 
         <p className="mb-10 max-w-xl text-lg leading-relaxed text-text-muted">

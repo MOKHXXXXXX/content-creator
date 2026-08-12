@@ -44,12 +44,6 @@ describe("Navbar", () => {
     expect(desktopNav.textContent).toContain("Contact");
   });
 
-  it("renders the Hire Me CTA", () => {
-    render(<Navbar />);
-    const hireMeButtons = screen.getAllByText("Hire Me");
-    expect(hireMeButtons.length).toBeGreaterThan(0);
-  });
-
   it("toggles the mobile menu", () => {
     render(<Navbar />);
     const toggleButton = screen.getByLabelText("Toggle menu");

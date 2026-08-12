@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import portfolio from "@/data/portfolio.json";
 import { cn } from "@/lib/utils";
 
@@ -10,12 +9,6 @@ const categories = ["All", ...new Set(portfolio.map((item) => item.category))];
 
 export function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("All");
-  const shouldReduceMotion = useReducedMotion();
-  const [isReady, setIsReady] = useState(false);
-
-  useEffect(() => {
-    setIsReady(true);
-  }, []);
 
   const filteredItems =
     activeFilter === "All"
@@ -51,12 +44,12 @@ export function Portfolio() {
           ))}
         </div>
 
-        <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
-          {filteredItems.map((item, index) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredItems.map((item) => (
             <Link
               key={item.id}
               href={`/portfolio/${item.id}`}
-              className="group block overflow-hidden bg-bg p-6 transition-colors hover:bg-surface-alt sm:p-8"
+              className="group block overflow-hidden border border-border bg-bg p-6 transition-colors hover:bg-surface-alt sm:p-8"
             >
               <div className="mb-4 flex flex-wrap items-center gap-2">
                 <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-accent">

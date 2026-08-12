@@ -134,12 +134,12 @@ export default async function PortfolioDetailPage({ params }: PageProps) {
             <h2 className="mb-8 font-display text-2xl font-semibold text-text">
               Related samples
             </h2>
-            <div className="grid gap-px bg-border sm:grid-cols-2">
+            <div className="grid gap-4 sm:grid-cols-2">
               {relatedSamples.map((sample) => (
                 <Link
                   key={sample.id}
                   href={`/portfolio/${sample.id}`}
-                  className="group block bg-bg p-6 transition-colors hover:bg-surface-alt"
+                  className="group block border border-border bg-bg p-6 transition-colors hover:bg-surface-alt"
                 >
                   <span className="mb-2 inline-block font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
                     {sample.category}

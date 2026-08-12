@@ -13,7 +13,7 @@ export function Contact() {
               Contact
             </p>
             <h2 className="mb-6 font-display text-3xl font-semibold leading-[1.15] tracking-tight text-text sm:text-4xl">
-              Let's work together.
+              Let&apos;s work together.
             </h2>
             <p className="mb-8 text-base leading-relaxed text-text/60">
               Tell me about your project. I reply within one to two business

@@ -1,13 +1,6 @@
-"use client";
-
-import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import testimonials from "@/data/testimonials.json";
-import { cn } from "@/lib/utils";
 
 export function Testimonials() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   return (
     <section
       id="testimonials"
@@ -24,7 +17,7 @@ export function Testimonials() {
         </div>
 
         <div className="grid gap-8 lg:grid-cols-3">
-          {testimonials.map((testimonial, i) => (
+          {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
               className="group border border-border bg-surface p-6 transition-colors hover:border-text-muted/40 sm:p-8"
@@ -33,7 +26,7 @@ export function Testimonials() {
                 Testimonial
               </div>
               <p className="mb-6 text-sm leading-relaxed text-text/80">
-                "{testimonial.quote}"
+                &ldquo;{testimonial.quote}&rdquo;
               </p>
               <div>
                 <div className="font-display font-semibold text-text">

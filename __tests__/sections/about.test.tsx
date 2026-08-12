@@ -5,7 +5,7 @@ describe("About section", () => {
   it("renders the heading", () => {
     render(<About />);
     expect(
-      screen.getByText(/I turn research into writing people actually read/i)
+      screen.getByText(/I turn product complexity into clear, confident copy/i)
     ).toBeInTheDocument();
   });
 

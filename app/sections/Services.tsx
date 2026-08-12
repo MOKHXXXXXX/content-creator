@@ -13,11 +13,11 @@ export function Services() {
           </h2>
         </div>
 
-        <div className="grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
             <div
               key={service.id}
-              className="bg-bg p-6 transition-colors hover:bg-surface-alt sm:p-8 group"
+              className="border border-border bg-bg p-6 transition-colors hover:bg-surface-alt sm:p-8 group"
             >
               <span className="mb-4 inline-block font-mono text-[10px] uppercase tracking-[0.12em] text-accent">
                 {service.tag}

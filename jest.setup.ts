@@ -1,8 +1,7 @@
 // @ts-check
+import "@testing-library/jest-dom";
 
 if (typeof window !== "undefined") {
-  require("@testing-library/jest-dom");
-
   Object.defineProperty(window, "matchMedia", {
     writable: true,
     value: jest.fn().mockImplementation((query: string) => ({

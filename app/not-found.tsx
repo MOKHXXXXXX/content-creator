@@ -12,7 +12,7 @@ export default function NotFound() {
         404
       </p>
       <h1 className="mb-4 font-display text-4xl font-semibold tracking-tight text-text sm:text-5xl">
-        This page doesn't exist.
+        This page doesn&apos;t exist.
       </h1>
       <p className="mb-8 text-lg text-text-muted">
         It may have been moved, deleted, or never written.

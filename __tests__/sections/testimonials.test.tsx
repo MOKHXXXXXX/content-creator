@@ -4,39 +4,21 @@ import { Testimonials } from "@/app/sections/Testimonials";
 describe("Testimonials section", () => {
   it("renders the heading", () => {
     render(<Testimonials />);
-    expect(
-      screen.getByText(/Notes from the margins/i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/What founders say/i)).toBeInTheDocument();
   });
 
-  it("renders the philosophy quote", () => {
+  it("renders testimonial quotes", () => {
     render(<Testimonials />);
-    expect(
-      screen.getByText(/Good writing doesn't just fill space/i)
-    ).toBeInTheDocument();
+    expect(screen.getByText(/doesn't just write/i)).toBeInTheDocument();
+    expect(screen.getByText(/highest-converting channel/i)).toBeInTheDocument();
+    expect(screen.getByText(/converted at 4\.8%/i)).toBeInTheDocument();
   });
 
-  it("renders sample testimonial labels", () => {
+  it("renders testimonial names and roles", () => {
     render(<Testimonials />);
-    const sampleLabels = screen.getAllByText(/Sample testimonial/i);
-    expect(sampleLabels.length).toBeGreaterThan(0);
-  });
-
-  it("renders testimonial client names in both desktop and mobile views", () => {
-    render(<Testimonials />);
-    // Client names appear both in desktop annotation cards and mobile carousel
-    expect(screen.getAllByText("Priya Sharma").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("David Kim").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Lena Okafor").length).toBeGreaterThan(0);
-  });
-
-  it("renders navigation arrows on mobile", () => {
-    render(<Testimonials />);
-    expect(
-      screen.getByLabelText(/Previous testimonial/i)
-    ).toBeInTheDocument();
-    expect(
-      screen.getByLabelText(/Next testimonial/i)
-    ).toBeInTheDocument();
+    expect(screen.getByText("Salma Adel")).toBeInTheDocument();
+    expect(screen.getByText("Omar El-Sayed")).toBeInTheDocument();
+    expect(screen.getByText("Nour Hassan")).toBeInTheDocument();
+    expect(screen.getByText(/Head of Growth, StackFlow/i)).toBeInTheDocument();
   });
 });
