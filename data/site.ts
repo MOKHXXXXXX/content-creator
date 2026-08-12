@@ -5,7 +5,7 @@ export const site = {
   subheadline:
     "I help brands and businesses tell stories that engage readers, build trust, and drive results.",
   email: "hello@alexmorganwrites.com",
-  url: "https://alexmorganwrites.com",
+  url: "https://youssef-writer.vercel.app",
   description:
     "Professional content writer specializing in SEO content, blog posts, copywriting, and social media captions.",
   keywords: [
