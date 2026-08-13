@@ -35,6 +35,8 @@ function buildRequestWithIp(body: unknown, ip: string): NextRequest {
 }
 
 describe("POST /api/contact", () => {
+  let mockSend: jest.Mock;
+
   beforeEach(() => {
     resetContactRateLimit();
     process.env.RESEND_API_KEY = "re_test";
@@ -42,7 +44,7 @@ describe("POST /api/contact", () => {
     process.env.TO_EMAIL = "to@test.com";
 
     const resendMock = Resend as jest.Mock;
-    const mockSend = jest
+    mockSend = jest
       .fn()
       .mockResolvedValue({ data: { id: "msg_1" }, error: null });
     resendMock.mockReturnValue({ emails: { send: mockSend } });
@@ -72,6 +74,7 @@ describe("POST /api/contact", () => {
     const json = await res.json();
     expect(json.success).toBe(true);
     expect(json.messageId).toBe("msg_1");
+    expect(json.version).toBe("v2");
   });
 
   it("returns 429 after exceeding rate limits", async () => {
@@ -103,6 +106,7 @@ describe("POST /api/contact", () => {
     const json = await res.json();
     expect(json.success).toBe(true);
     expect(json.messageId).toBeUndefined();
+    expect(json.version).toBe("v2");
     expect(Resend as jest.Mock).not.toHaveBeenCalled();
   });
 
@@ -153,5 +157,58 @@ describe("POST /api/contact", () => {
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
+  });
+
+  it("returns 200 even when the auto-reply send throws", async () => {
+    mockSend
+      .mockResolvedValueOnce({ data: { id: "msg_1" }, error: null })
+      .mockRejectedValueOnce(new Error("auto-reply rejected by provider"));
+
+    const res = await POST(
+      buildRequest({
+        name: "John",
+        email: "visitor@test.com",
+        message: "Hello, I would like to hire you.",
+        hpTime: 10,
+      })
+    );
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.success).toBe(true);
+    expect(json.messageId).toBe("msg_1");
+  });
+
+  it("returns 500 when the notify email fails", async () => {
+    mockSend.mockResolvedValueOnce({
+      data: null,
+      error: new Error("provider error"),
+    });
+
+    const res = await POST(
+      buildRequest({
+        name: "John",
+        email: "visitor@test.com",
+        message: "Hello, I would like to hire you.",
+        hpTime: 10,
+      })
+    );
+    expect(res.status).toBe(500);
+    const json = await res.json();
+    expect(json.error).toContain("Failed to send message");
+  });
+
+  it("skips the auto-reply when using the Resend sandbox sender", async () => {
+    process.env.FROM_EMAIL = "onboarding@resend.dev";
+
+    const res = await POST(
+      buildRequest({
+        name: "John",
+        email: "visitor@test.com",
+        message: "Hello, I would like to hire you.",
+        hpTime: 10,
+      })
+    );
+    expect(res.status).toBe(200);
+    expect(mockSend).toHaveBeenCalledTimes(1);
   });
 });
