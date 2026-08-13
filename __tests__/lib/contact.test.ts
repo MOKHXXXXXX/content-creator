@@ -1,6 +1,7 @@
 import {
   isContactRateLimited,
   resetContactRateLimit,
+  isHoneypotTriggered,
   getClientIp,
   contactEmailTemplate,
   autoReplyEmailTemplate,
@@ -28,6 +29,25 @@ describe("rate limiter", () => {
     }
     expect(isContactRateLimited("1.1.1.1")).toBe(true);
     expect(isContactRateLimited("2.2.2.2")).toBe(false);
+  });
+});
+
+describe("isHoneypotTriggered", () => {
+  it("treats a filled honeypot as a bot", () => {
+    expect(isHoneypotTriggered("http://spam.com", 30)).toBe(true);
+  });
+
+  it("treats a missing hpTime as a bot", () => {
+    expect(isHoneypotTriggered("", undefined)).toBe(true);
+  });
+
+  it("treats submissions under 3 seconds as bots", () => {
+    expect(isHoneypotTriggered("", 0)).toBe(true);
+    expect(isHoneypotTriggered("", 2)).toBe(true);
+  });
+
+  it("accepts a human-like submission", () => {
+    expect(isHoneypotTriggered("", 10)).toBe(false);
   });
 });
 

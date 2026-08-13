@@ -48,6 +48,16 @@ describe("contactSchema", () => {
     expect(result.success).toBe(true);
   });
 
+  it("allows optional hpTime field", () => {
+    const result = contactSchema.safeParse({
+      name: "John Doe",
+      email: "john@example.com",
+      message: "Hello, I would like to hire you.",
+      hpTime: 10,
+    });
+    expect(result.success).toBe(true);
+  });
+
   it("rejects a message longer than 5000 chars", () => {
     const result = contactSchema.safeParse({
       name: "John Doe",

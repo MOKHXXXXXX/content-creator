@@ -102,7 +102,7 @@ describe("ContactForm", () => {
 
   it("includes the honeypot field hidden in the DOM", () => {
     render(<ContactForm />);
-    const honeypot = document.querySelector('input[name="website"]');
+    const honeypot = document.querySelector('input[name="hp_f4v8q2"]');
     expect(honeypot).toHaveClass("hidden");
   });
 });
