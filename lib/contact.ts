@@ -7,6 +7,7 @@ export const contactSchema = z.object({
   message: z.string().min(10, "Message is too short").max(5000),
   website: z.string().optional(),
   hpTime: z.number().optional(),
+  interacted: z.boolean().optional(),
 });
 
 export type ContactData = z.infer<typeof contactSchema>;
@@ -35,11 +36,13 @@ const MIN_HUMAN_SUBMIT_SECONDS = 3;
 
 export function isHoneypotTriggered(
   website?: string,
-  hpTime?: number
+  hpTime?: number,
+  interacted?: boolean
 ): boolean {
   if (website && website.length > 0) return true;
-  if (hpTime == null) return true;
-  return hpTime < MIN_HUMAN_SUBMIT_SECONDS;
+  if (!interacted && (hpTime == null || hpTime < MIN_HUMAN_SUBMIT_SECONDS))
+    return true;
+  return false;
 }
 
 export function contactEmailTemplate(body: {

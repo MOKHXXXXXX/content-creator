@@ -68,6 +68,7 @@ describe("POST /api/contact", () => {
       email: "john@test.com",
       message: "Hello, I would like to hire you.",
       hpTime: 10,
+      interacted: true,
     });
     const res = await POST(req);
     expect(res.status).toBe(200);
@@ -83,6 +84,7 @@ describe("POST /api/contact", () => {
       email: "john@test.com",
       message: "Hello, I would like to hire you.",
       hpTime: 10,
+      interacted: true,
     };
 
     for (let i = 0; i < 5; i++) {
@@ -110,13 +112,14 @@ describe("POST /api/contact", () => {
     expect(Resend as jest.Mock).not.toHaveBeenCalled();
   });
 
-  it("returns 200 and skips email when hpTime is missing or too fast", async () => {
+  it("returns 200 and skips email when hpTime is missing or too fast without interaction", async () => {
     const fast = await POST(
       buildRequest({
         name: "John",
         email: "john@test.com",
         message: "Hello, I would like to hire you.",
         hpTime: 0,
+        interacted: false,
       })
     );
     expect(fast.status).toBe(200);
@@ -127,10 +130,27 @@ describe("POST /api/contact", () => {
         name: "John",
         email: "john@test.com",
         message: "Hello, I would like to hire you.",
+        interacted: false,
       })
     );
     expect(missing.status).toBe(200);
     expect(Resend as jest.Mock).not.toHaveBeenCalled();
+  });
+
+  it("sends the email when the user interacted even if hpTime is fast", async () => {
+    const res = await POST(
+      buildRequest({
+        name: "John",
+        email: "john@test.com",
+        message: "Hello, I would like to hire you.",
+        hpTime: 1,
+        interacted: true,
+      })
+    );
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.success).toBe(true);
+    expect(json.messageId).toBe("msg_1");
   });
 
   it("returns 500 when RESEND_API_KEY is missing", async () => {
@@ -140,6 +160,7 @@ describe("POST /api/contact", () => {
       email: "john@test.com",
       message: "Hello, I would like to hire you.",
       hpTime: 10,
+      interacted: true,
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
@@ -154,6 +175,7 @@ describe("POST /api/contact", () => {
       email: "john@test.com",
       message: "Hello, I would like to hire you.",
       hpTime: 10,
+      interacted: true,
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
@@ -170,6 +192,7 @@ describe("POST /api/contact", () => {
         email: "visitor@test.com",
         message: "Hello, I would like to hire you.",
         hpTime: 10,
+        interacted: true,
       })
     );
     expect(res.status).toBe(200);
@@ -190,6 +213,7 @@ describe("POST /api/contact", () => {
         email: "visitor@test.com",
         message: "Hello, I would like to hire you.",
         hpTime: 10,
+        interacted: true,
       })
     );
     expect(res.status).toBe(500);
@@ -206,6 +230,7 @@ describe("POST /api/contact", () => {
         email: "visitor@test.com",
         message: "Hello, I would like to hire you.",
         hpTime: 10,
+        interacted: true,
       })
     );
     expect(res.status).toBe(200);

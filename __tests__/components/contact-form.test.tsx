@@ -103,6 +103,8 @@ describe("ContactForm", () => {
   it("includes the honeypot field hidden in the DOM", () => {
     render(<ContactForm />);
     const honeypot = document.querySelector('input[name="hp_f4v8q2"]');
-    expect(honeypot).toHaveClass("hidden");
+    expect(honeypot).toHaveClass("absolute");
+    expect(honeypot).toHaveClass("-left-[9999px]");
+    expect(honeypot).toHaveClass("opacity-0");
   });
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -14,6 +14,7 @@ const contactSchema = z.object({
   service: z.string().optional(),
   message: z.string().min(10, "Message is too short").max(5000),
   website: z.string().optional(),
+  interacted: z.boolean().optional(),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -33,6 +34,13 @@ export function ContactForm() {
     "idle" | "submitting" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const firstInteractionRef = useRef<number | null>(null);
+
+  const handleFirstInteraction = () => {
+    if (!firstInteractionRef.current) {
+      firstInteractionRef.current = Date.now();
+    }
+  };
 
   const {
     register,
@@ -61,15 +69,25 @@ export function ContactForm() {
             'input[name="hp_f4v8q2"]'
           )?.value || ""
         ).trim();
+      const interacted = firstInteractionRef.current != null;
       const hpTime = Math.max(
         0,
-        Math.round((Date.now() - FORM_LOADED_AT) / 1000)
+        Math.round(
+          (Date.now() -
+            (firstInteractionRef.current ?? FORM_LOADED_AT)) /
+            1000
+        )
       );
 
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, website: honeypot, hpTime }),
+        body: JSON.stringify({
+          ...data,
+          website: honeypot,
+          hpTime,
+          interacted,
+        }),
       });
 
       const result = await response.json();
@@ -110,7 +128,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-8">
+    <form onSubmit={onSubmit} autoComplete="off" className="space-y-8">
       <div className="grid gap-8 sm:grid-cols-2">
         <div>
           <label
@@ -123,6 +141,7 @@ export function ContactForm() {
             id="name"
             type="text"
             {...register("name")}
+            onFocus={handleFirstInteraction}
             className="w-full border-0 border-b border-border bg-transparent py-2 text-text placeholder:text-text-muted/40 focus:border-accent focus:outline-none"
             placeholder="Your name"
           />
@@ -144,6 +163,7 @@ export function ContactForm() {
             id="email"
             type="email"
             {...register("email")}
+            onFocus={handleFirstInteraction}
             className="w-full border-0 border-b border-border bg-transparent py-2 text-text placeholder:text-text-muted/40 focus:border-accent focus:outline-none"
             placeholder="you@company.com"
           />
@@ -190,6 +210,7 @@ export function ContactForm() {
           id="message"
           rows={4}
           {...register("message")}
+          onFocus={handleFirstInteraction}
           className="w-full resize-none border-0 border-b border-border bg-transparent py-2 text-text placeholder:text-text-muted/40 focus:border-accent focus:outline-none"
           placeholder="Tell me about your project..."
         />
@@ -203,7 +224,7 @@ export function ContactForm() {
       <input
         type="text"
         name="hp_f4v8q2"
-        className="hidden"
+        className="absolute -left-[9999px] opacity-0"
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"

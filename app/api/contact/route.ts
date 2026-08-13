@@ -32,10 +32,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { name, email, service, message, website, hpTime } = result.data;
+    const { name, email, service, message, website, hpTime, interacted } =
+      result.data;
 
-    if (isHoneypotTriggered(website, hpTime)) {
-      console.error("Contact form rejected as bot", { website, hpTime, email });
+    if (isHoneypotTriggered(website, hpTime, interacted)) {
+      console.error("Contact form rejected as bot", {
+        website,
+        hpTime,
+        interacted,
+        email,
+      });
       return NextResponse.json(
         { success: true, version: API_VERSION },
         { status: 200 }

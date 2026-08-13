@@ -34,20 +34,28 @@ describe("rate limiter", () => {
 
 describe("isHoneypotTriggered", () => {
   it("treats a filled honeypot as a bot", () => {
-    expect(isHoneypotTriggered("http://spam.com", 30)).toBe(true);
+    expect(isHoneypotTriggered("http://spam.com", 30, true)).toBe(true);
   });
 
-  it("treats a missing hpTime as a bot", () => {
-    expect(isHoneypotTriggered("", undefined)).toBe(true);
+  it("treats a missing hpTime without interaction as a bot", () => {
+    expect(isHoneypotTriggered("", undefined, false)).toBe(true);
   });
 
-  it("treats submissions under 3 seconds as bots", () => {
-    expect(isHoneypotTriggered("", 0)).toBe(true);
-    expect(isHoneypotTriggered("", 2)).toBe(true);
+  it("treats fast submissions without interaction as bots", () => {
+    expect(isHoneypotTriggered("", 0, false)).toBe(true);
+    expect(isHoneypotTriggered("", 2, false)).toBe(true);
   });
 
-  it("accepts a human-like submission", () => {
-    expect(isHoneypotTriggered("", 10)).toBe(false);
+  it("accepts a fast submission when the user interacted", () => {
+    expect(isHoneypotTriggered("", 1, true)).toBe(false);
+  });
+
+  it("accepts a slow submission without interaction", () => {
+    expect(isHoneypotTriggered("", 10, false)).toBe(false);
+  });
+
+  it("accepts a normal human-like submission", () => {
+    expect(isHoneypotTriggered("", 10, true)).toBe(false);
   });
 });
 
