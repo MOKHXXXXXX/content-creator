@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Loader2 } from "lucide-react";
 
+const FORM_LOADED_AT = Date.now();
+
 const contactSchema = z.object({
   name: z.string().min(2, "Name is too short").max(100),
   email: z.string().email("Please enter a valid email"),
@@ -34,22 +36,40 @@ export function ContactForm() {
 
   const {
     register,
-    handleSubmit,
+    getValues,
+    trigger,
     reset,
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const isValid = await trigger();
+    if (!isValid) return;
+
     setStatus("submitting");
     setErrorMessage("");
 
     try {
+      const data = getValues();
+      const honeypot =
+        (
+          document.querySelector<HTMLInputElement>(
+            'input[name="hp_f4v8q2"]'
+          )?.value || ""
+        ).trim();
+      const hpTime = Math.max(
+        0,
+        Math.round((Date.now() - FORM_LOADED_AT) / 1000)
+      );
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, website: honeypot, hpTime }),
       });
 
       const result = await response.json();
@@ -90,7 +110,7 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form onSubmit={onSubmit} className="space-y-8">
       <div className="grid gap-8 sm:grid-cols-2">
         <div>
           <label
@@ -182,10 +202,11 @@ export function ContactForm() {
 
       <input
         type="text"
-        {...register("website")}
+        name="hp_f4v8q2"
         className="hidden"
         tabIndex={-1}
         autoComplete="off"
+        aria-hidden="true"
       />
 
       {status === "error" && (

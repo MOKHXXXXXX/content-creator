@@ -5,6 +5,7 @@ import {
   contactEmailTemplate,
   autoReplyEmailTemplate,
   isContactRateLimited,
+  isHoneypotTriggered,
   getClientIp,
 } from "@/lib/contact";
 
@@ -29,9 +30,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { name, email, service, message, website } = result.data;
+    const { name, email, service, message, website, hpTime } = result.data;
 
-    if (website && website.length > 0) {
+    if (isHoneypotTriggered(website, hpTime)) {
+      console.error("Contact form rejected as bot", { website, hpTime, email });
       return NextResponse.json({ success: true }, { status: 200 });
     }
 

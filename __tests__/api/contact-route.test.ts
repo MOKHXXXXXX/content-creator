@@ -65,6 +65,7 @@ describe("POST /api/contact", () => {
       name: "John",
       email: "john@test.com",
       message: "Hello, I would like to hire you.",
+      hpTime: 10,
     });
     const res = await POST(req);
     expect(res.status).toBe(200);
@@ -78,6 +79,7 @@ describe("POST /api/contact", () => {
       name: "John",
       email: "john@test.com",
       message: "Hello, I would like to hire you.",
+      hpTime: 10,
     };
 
     for (let i = 0; i < 5; i++) {
@@ -88,15 +90,43 @@ describe("POST /api/contact", () => {
     expect(res.status).toBe(429);
   });
 
-  it("returns 200 for honeypot-filled submissions", async () => {
+  it("returns 200 and skips email for honeypot-filled submissions", async () => {
     const req = buildRequest({
       name: "John",
       email: "john@test.com",
       message: "Hello, I would like to hire you.",
       website: "http://spam.com",
+      hpTime: 60,
     });
     const res = await POST(req);
     expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.success).toBe(true);
+    expect(json.messageId).toBeUndefined();
+    expect(Resend as jest.Mock).not.toHaveBeenCalled();
+  });
+
+  it("returns 200 and skips email when hpTime is missing or too fast", async () => {
+    const fast = await POST(
+      buildRequest({
+        name: "John",
+        email: "john@test.com",
+        message: "Hello, I would like to hire you.",
+        hpTime: 0,
+      })
+    );
+    expect(fast.status).toBe(200);
+    expect(Resend as jest.Mock).not.toHaveBeenCalled();
+
+    const missing = await POST(
+      buildRequest({
+        name: "John",
+        email: "john@test.com",
+        message: "Hello, I would like to hire you.",
+      })
+    );
+    expect(missing.status).toBe(200);
+    expect(Resend as jest.Mock).not.toHaveBeenCalled();
   });
 
   it("returns 500 when RESEND_API_KEY is missing", async () => {
@@ -105,6 +135,7 @@ describe("POST /api/contact", () => {
       name: "John",
       email: "john@test.com",
       message: "Hello, I would like to hire you.",
+      hpTime: 10,
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
@@ -118,6 +149,7 @@ describe("POST /api/contact", () => {
       name: "John",
       email: "john@test.com",
       message: "Hello, I would like to hire you.",
+      hpTime: 10,
     });
     const res = await POST(req);
     expect(res.status).toBe(500);
