@@ -7,8 +7,9 @@ test.describe("Contact form", () => {
 
   test("shows validation errors on empty submit", async ({ page }) => {
     await page.locator("#contact").scrollIntoViewIfNeeded();
-    await page.getByLabel("Name").waitFor({ state: "visible" });
-    await page.locator('button[type="submit"]').click();
+    const submitBtn = page.locator('button[type="submit"]');
+    await submitBtn.waitFor({ state: "visible" });
+    await submitBtn.click();
     await expect(page.getByText(/Name is too short/i)).toBeVisible({ timeout: 15000 });
     await expect(page.getByText(/valid email/i)).toBeVisible();
     await expect(page.getByText(/Message is too short/i)).toBeVisible();

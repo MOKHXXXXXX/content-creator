@@ -1,11 +1,26 @@
-import { ContactForm } from "@/components/ContactForm";
+"use client";
+
+import { motion } from "framer-motion";
 import { site } from "@/data/site";
 import social from "@/data/social.json";
 import { Icon } from "@/components/icon";
+import ContactFormLoader from "@/components/ContactFormLoader";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+};
 
 export function Contact() {
   return (
-    <section id="contact" className="border-b border-border bg-surface py-20 sm:py-24 lg:py-32">
+    <motion.section
+      id="contact"
+      className="border-b border-border bg-surface py-20 sm:py-24 lg:py-32"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
@@ -56,10 +71,10 @@ export function Contact() {
           </div>
 
           <div className="lg:col-span-7">
-            <ContactForm />
+            <ContactFormLoader />
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

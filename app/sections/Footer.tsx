@@ -1,11 +1,25 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { site } from "@/data/site";
 import social from "@/data/social.json";
 import { Icon } from "@/components/icon";
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] as const } },
+};
+
 export function Footer() {
   return (
-    <footer className="border-t border-border py-10 sm:py-12">
+    <motion.footer
+      className="border-t border-border py-10 sm:py-12"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-40px" }}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <div>
@@ -44,6 +58,6 @@ export function Footer() {
           </Link>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }

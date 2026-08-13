@@ -1,4 +1,13 @@
 import { render, screen } from "@testing-library/react";
+
+jest.mock("@/components/ContactFormLoader", () => ({
+  __esModule: true,
+  default: () => {
+    const { ContactForm } = jest.requireActual("@/components/ContactForm");
+    return <ContactForm />;
+  },
+}));
+
 import { Contact } from "@/app/sections/Contact";
 
 describe("Contact section", () => {

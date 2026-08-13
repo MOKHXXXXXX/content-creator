@@ -1,10 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { site } from "@/data/site";
 
 export function Hero() {
   return (
     <section id="home" className="flex flex-1 flex-col justify-center px-4 pb-24 pt-20 sm:px-6 sm:pb-32 sm:pt-28 lg:px-8 lg:pb-40 lg:pt-36">
-      <div className="mx-auto w-full max-w-4xl">
+      <motion.div
+        className="mx-auto w-full max-w-4xl"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
         <p className="mb-6 font-mono text-xs uppercase tracking-[0.12em] text-text-muted">
           {site.title}
         </p>
@@ -37,7 +46,7 @@ export function Hero() {
             View work
           </Link>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
